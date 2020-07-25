@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  backend:
+    container_name: blog-backend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    working_dir: /app
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
+      - 8000:8000
+    command: ["mvn", "spring-boot:run"]
+
+  mysql:
+    container_name: blog-mysql
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_USER: spring
+      MYSQL_PASSWORD: spring
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3307:3306
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+
+volumes:
+  db_data:
