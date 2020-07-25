@@ -21,12 +21,12 @@ services:
     image: mysql
     restart: always
     environment:
-      MYSQL_USER: spring
-      MYSQL_PASSWORD: spring
-      MYSQL_DATABASE: mydb
+      MYSQL_USER: blog
+      MYSQL_PASSWORD: blog
+      MYSQL_DATABASE: blogdb
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3307:3306
+      - 3306:3306
     volumes:
       - db_data:/var/lib/mysql
       - ./docker/mysql/init:/docker-entrypoint-initdb.d

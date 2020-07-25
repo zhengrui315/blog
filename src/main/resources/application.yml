@@ -3,6 +3,19 @@ server:
     context-path:
 
 spring:
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#  profile: local
+
+  datasource:
+    url: jdbc:mysql://blog-mysql:3306/blogdb?serverTimeZone=UTC&createDatabaseIfNotExist=True
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    # https://stackoverflow.com/questions/26881739/unable-to-get-spring-boot-to-automatically-create-database-schema#answer-26902713
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+
